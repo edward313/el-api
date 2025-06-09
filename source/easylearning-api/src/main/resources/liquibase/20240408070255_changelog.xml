@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1712559784038-1">
+        <addColumn tableName="db_el_register_payout">
+            <column name="payout_period_id" type="bigint" afterColumn="account_kind"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1712559784038-2">
+        <addForeignKeyConstraint baseColumnNames="payout_period_id" baseTableName="db_el_register_payout" constraintName="FKikr8ye6nfwhcgbxet7ptl9eqo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_payout_period" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

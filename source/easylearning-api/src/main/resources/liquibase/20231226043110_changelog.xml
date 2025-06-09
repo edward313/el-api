@@ -1,0 +1,128 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1703565080965-1">
+        <createTable tableName="db_el_expert_registration">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_expert_registrationPK"/>
+            </column>
+            <column name="phone" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="avatar" type="VARCHAR(255)"/>
+            <column name="category_id" type="BIGINT"/>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="ward_id" type="BIGINT"/>
+            <column name="district_id" type="BIGINT"/>
+            <column name="province_id" type="BIGINT"/>
+            <column name="introduction" type="TEXT"/>
+            <column name="referral_code" type="VARCHAR(255)"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-2">
+        <createTable tableName="db_el_slideshow">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_slideshowPK"/>
+            </column>
+            <column name="url" type="VARCHAR(255)"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="action" type="INT"/>
+            <column name="image" type="VARCHAR(255)"/>
+            <column name="ordering" type="INT"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-3">
+        <addColumn tableName="db_el_expert">
+            <column name="address" type="varchar(255)" afterColumn="birthday"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-6">
+        <addColumn tableName="db_el_expert">
+            <column name="ward_id" type="bigint" afterColumn="address"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-4">
+        <addColumn tableName="db_el_expert">
+            <column name="district_id" type="bigint" afterColumn="ward_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-5">
+        <addColumn tableName="db_el_expert">
+            <column name="province_id" type="bigint" afterColumn="district_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-7">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="db_el_expert_registration"
+                                 constraintName="FK4vs3ll83ia2fa8j6hlnrrthfy" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_category" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-8">
+        <addForeignKeyConstraint baseColumnNames="district_id" baseTableName="db_el_expert_registration"
+                                 constraintName="FK6yo2gqxsws48h98bul556he4n" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-9">
+        <addForeignKeyConstraint baseColumnNames="province_id" baseTableName="db_el_expert"
+                                 constraintName="FK8rf7kmgmseh5gu94nq8sqbg1f" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-10">
+        <addForeignKeyConstraint baseColumnNames="district_id" baseTableName="db_el_expert"
+                                 constraintName="FKgsccdupp62g6kgx8wheeph8c2" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-11">
+        <addForeignKeyConstraint baseColumnNames="ward_id" baseTableName="db_el_expert_registration"
+                                 constraintName="FKhtxb7esoyn8gmkext6p33ovu9" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-12">
+        <addForeignKeyConstraint baseColumnNames="province_id" baseTableName="db_el_expert_registration"
+                                 constraintName="FKi1y7tso0dknql7nxlu4kmxgts" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703565080965-13">
+        <addForeignKeyConstraint baseColumnNames="ward_id" baseTableName="db_el_expert"
+                                 constraintName="FKldvqn1w0v7h2412sw9s4owr91" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>

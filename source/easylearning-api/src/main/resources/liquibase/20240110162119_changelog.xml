@@ -1,0 +1,44 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1704903690988-1">
+        <createTable tableName="db_el_review">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_reviewPK"/>
+            </column>
+            <column name="student_id" type="BIGINT"/>
+            <column name="course_id" type="BIGINT"/>
+            <column name="star" type="INT"/>
+            <column name="message" type="TEXT"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1704903690988-2">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="db_el_review"
+                                 constraintName="FK8dcy3k1liacdvfa0dk9f1chqn" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1704903690988-3">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_review"
+                                 constraintName="FKmj9tehefovbc1wof5vgu54ris" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>

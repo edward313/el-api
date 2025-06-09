@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1706344675715-1">
+        <addColumn tableName="db_el_completion">
+            <column name="is_finished" type="bit" afterColumn="lesson_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1706344675715-2">
+        <addColumn tableName="db_el_expert">
+            <column name="is_outstanding" type="bit" afterColumn="account_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1706344675715-3">
+        <addColumn tableName="db_el_expert">
+            <column name="ordering" type="integer" afterColumn="is_outstanding"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1706344675715-4">
+        <addColumn tableName="db_el_completion">
+            <column name="second_progress" type="bigint" afterColumn="is_finished"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

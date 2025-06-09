@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1701313337860-1">
+        <createTable tableName="db_el_course_combo_detail">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_course_combo_detailPK"/>
+            </column>
+            <column name="combo_id" type="BIGINT"/>
+            <column name="course_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701313337860-2">
+        <addForeignKeyConstraint baseColumnNames="combo_id" baseTableName="db_el_course_combo_detail"
+                                 constraintName="FK7osqfx6hnvokcondd3m5isd6y" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701313337860-3">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_course_combo_detail"
+                                 constraintName="FKjbrpciwi03e8reunkpogrgfdu" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701313337860-4">
+        <dropForeignKeyConstraint baseTableName="db_el_course" constraintName="FKl1sb3tn8uai5ik26irvc507hc"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701313337860-11">
+        <dropColumn columnName="parent_id" tableName="db_el_course"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1703740466826-1">
+        <addColumn tableName="db_el_expert">
+            <column name="bank_info" type="text" afterColumn="birthday"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703740466826-2">
+        <addColumn tableName="db_el_student">
+            <column name="bank_info" type="varchar(255)" afterColumn="birthday"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703740466826-3">
+        <addColumn tableName="db_el_expert">
+            <column name="identification" type="text" afterColumn="bank_info"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703740466826-4">
+        <addColumn tableName="db_el_student">
+            <column name="identification" type="varchar(255)" afterColumn="bank_info"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

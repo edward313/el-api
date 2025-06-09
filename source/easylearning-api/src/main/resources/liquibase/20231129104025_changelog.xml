@@ -1,0 +1,127 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1701254434947-1">
+        <createTable tableName="db_el_course">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_coursePK"/>
+            </column>
+            <column name="expert_id" type="BIGINT"/>
+            <column name="category_id" type="BIGINT"/>
+            <column name="parent_id" type="BIGINT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="kind" type="INT"/>
+            <column name="price" type="DOUBLE PRECISION"/>
+            <column name="ratio_share" type="INT"/>
+            <column name="sale_off" type="INT"/>
+            <column name="avatar" type="VARCHAR(255)"/>
+            <column name="banner" type="VARCHAR(255)"/>
+            <column name="short_description" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-2">
+        <createTable tableName="db_el_lesson">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_lessonPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="section_id" type="BIGINT"/>
+            <column name="is_preview" type="BIT"/>
+            <column name="content" type="TEXT"/>
+            <column name="description" type="TEXT"/>
+            <column name="duration" type="INT"/>
+            <column name="kind" type="INT"/>
+            <column name="ordering" type="INT"/>
+            <column name="url_document" type="VARCHAR(255)"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-3">
+        <createTable tableName="db_el_section">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_sectionPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="course_id" type="BIGINT"/>
+            <column name="description" type="TEXT"/>
+            <column name="ordering" type="INT"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-4">
+        <addForeignKeyConstraint baseColumnNames="section_id" baseTableName="db_el_lesson"
+                                 constraintName="FK5lf34nqnm15cmf13cdm2bly9e" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_section" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-5">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="db_el_course"
+                                 constraintName="FKl1sb3tn8uai5ik26irvc507hc" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-6">
+        <addForeignKeyConstraint baseColumnNames="expert_id" baseTableName="db_el_course"
+                                 constraintName="FKmkgje12f0shc3l1lc98w6x7hr" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_expert" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-7">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_section"
+                                 constraintName="FKovy9ux4hqwctmi5quv3u4lvh8" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701254434947-8">
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="db_el_course"
+                                 constraintName="FKrhrx5jhvb6u0v6mobb7wsr7fj" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_category" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

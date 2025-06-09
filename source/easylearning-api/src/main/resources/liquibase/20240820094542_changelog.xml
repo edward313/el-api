@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1724147160489-1">
+        <addColumn tableName="db_el_booking">
+            <column name="coupon_sell_code" type="varchar(255)" afterColumn="payment_data"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1724147160489-2">
+        <preConditions onFail="MARK_RAN">
+            <sqlCheck expectedResult="0">
+                SELECT COUNT(*) FROM db_el_permission WHERE id = 7693293330464768
+            </sqlCheck>
+        </preConditions>
+        <insert tableName="db_el_permission">
+            <column name="id" valueNumeric="7693293330464768"/>
+            <column name="name" value="Check Coupon Code"/>
+            <column name="action" value="/v1/seller/check-coupon"/>
+            <column name="show_menu" valueBoolean="0"/>
+            <column name="description" value="Check Coupon Code"/>
+            <column name="name_group" value="Seller"/>
+            <column name="p_code" value="SEL_CC"/>
+            <column name="status" valueNumeric="1"/>
+            <column name="created_by" value="admin"/>
+            <column name="created_date" valueDate="2024-08-17 10:58:10"/>
+            <column name="modified_by" value="admin"/>
+            <column name="modified_date" valueDate="2024-08-17 10:58:10"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

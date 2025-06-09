@@ -1,0 +1,53 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1703324662991-1">
+        <createTable tableName="db_el_revenue_share">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_revenue_sharePK"/>
+            </column>
+            <column name="expert_id" type="BIGINT"/>
+            <column name="seller_id" type="BIGINT"/>
+            <column name="ratio_share" type="INT"/>
+            <column name="course_transaction_id" type="BIGINT"/>
+            <column name="is_ref" type="BIT"/>
+            <column name="is_system" type="BIT"/>
+            <column name="payout_status" type="INT"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703324662991-2">
+        <addForeignKeyConstraint baseColumnNames="expert_id" baseTableName="db_el_revenue_share"
+                                 constraintName="FK8cs35a7f75pdb2v0idc8q9w5k" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_expert" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703324662991-3">
+        <addForeignKeyConstraint baseColumnNames="course_transaction_id" baseTableName="db_el_revenue_share"
+                                 constraintName="FK9ilrb6dbngagy3hyfewlvxqvo" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_course_transaction" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703324662991-4">
+        <addForeignKeyConstraint baseColumnNames="seller_id" baseTableName="db_el_revenue_share"
+                                 constraintName="FKawu0cvxgjkrleueooo4mcsq3i" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,65 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1701673182169-1">
+        <addColumn tableName="db_el_lesson">
+            <column name="course_id" type="bigint" afterColumn="name"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-2">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_lesson"
+                                 constraintName="FK6pesskan1llu1lp9kw972lqan" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-3">
+        <addForeignKeyConstraint baseColumnNames="section_id" baseTableName="db_el_lesson"
+                                 constraintName="FKn3401ym8s8lxff5nrmehm3trf" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_lesson"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-4">
+        <dropForeignKeyConstraint baseTableName="db_el_address" constraintName="FK20mqlhry7ck664s85wk1eq1qn"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-5">
+        <dropForeignKeyConstraint baseTableName="db_el_user" constraintName="FK30tks1lqufixlmk8b08gti667"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-6">
+        <dropForeignKeyConstraint baseTableName="db_el_lesson" constraintName="FK5lf34nqnm15cmf13cdm2bly9e"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-7">
+        <dropForeignKeyConstraint baseTableName="db_el_address" constraintName="FK8qmry5dwhndr3nd58d8tc4gas"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-8">
+        <dropForeignKeyConstraint baseTableName="db_el_address" constraintName="FKim4vth9cpbdrqunanc0h5oh5c"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-9">
+        <dropForeignKeyConstraint baseTableName="db_el_news" constraintName="FKk59lu60nces75j1n4amm9ipw4"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-10">
+        <dropForeignKeyConstraint baseTableName="db_el_service" constraintName="FKkhwfkupqyq24cbofkqutn1hw0"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-11">
+        <dropForeignKeyConstraint baseTableName="db_el_address" constraintName="FKo4m6xptceftxjfepiy01e1k0i"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-12">
+        <dropForeignKeyConstraint baseTableName="db_el_section" constraintName="FKovy9ux4hqwctmi5quv3u4lvh8"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-13">
+        <dropTable tableName="db_el_address"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-14">
+        <dropTable tableName="db_el_news"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-15">
+        <dropTable tableName="db_el_section"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-16">
+        <dropTable tableName="db_el_service"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701673182169-17">
+        <dropTable tableName="db_el_user"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1703145814266-2">
+        <addColumn tableName="db_el_promotion">
+            <column name="prefix" type="varchar(255)" afterColumn="state"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703145814266-1">
+        <addColumn tableName="db_el_promotion">
+            <column name="num_random" type="integer" afterColumn="prefix"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703145814266-3">
+        <addColumn tableName="db_el_booking">
+            <column name="promotion_id" type="bigint" afterColumn="student_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1703145814266-5">
+        <addForeignKeyConstraint baseColumnNames="promotion_id" baseTableName="db_el_booking"
+                                 constraintName="FKrw9m0pqc9xx0xa0rrpttvtais" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_promotion" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

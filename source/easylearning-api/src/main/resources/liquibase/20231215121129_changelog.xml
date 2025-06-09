@@ -1,0 +1,85 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1702642299661-1">
+        <createTable tableName="db_el_booking">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_bookingPK"/>
+            </column>
+            <column name="student_id" type="BIGINT"/>
+            <column name="payment_method" type="INT"/>
+            <column name="total_money" type="DOUBLE PRECISION"/>
+            <column name="sale_off_money" type="DOUBLE PRECISION"/>
+            <column name="payout_status" type="INT"/>
+            <column name="state" type="INT"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-2">
+        <addColumn tableName="db_el_course_transaction">
+            <column name="booking_id" type="bigint" afterColumn="expert_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-3">
+        <addColumn tableName="db_el_course_combo_detail">
+            <column name="price" type="double precision" afterColumn="course_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-4">
+        <addColumn tableName="db_el_referral_expert_log">
+            <column name="ref_expert_id" type="bigint" afterColumn="expert_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-5">
+        <addColumn tableName="db_el_referral_seller_log">
+            <column name="ref_student_id" type="bigint" afterColumn="student_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-6">
+        <addForeignKeyConstraint baseColumnNames="ref_student_id" baseTableName="db_el_referral_seller_log"
+                                 constraintName="FKacbp2myybege0gsyogbj04gsl" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-7">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="db_el_booking"
+                                 constraintName="FKg07mln59an3vg8nbdf90gx8po" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-8">
+        <addForeignKeyConstraint baseColumnNames="booking_id" baseTableName="db_el_course_transaction"
+                                 constraintName="FKl2bgtjgnmc1wyyiqff9gi0pwt" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_booking" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-9">
+        <addForeignKeyConstraint baseColumnNames="ref_expert_id" baseTableName="db_el_referral_expert_log"
+                                 constraintName="FKmuywf46jkxauas6oepf0ykw6" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_expert" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-10">
+        <dropForeignKeyConstraint baseTableName="db_el_course_transaction"
+                                  constraintName="FK4no4b0adjl3embc10f9ev2m1h"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702642299661-17">
+        <dropColumn columnName="student_id" tableName="db_el_course_transaction"/>
+    </changeSet>
+</databaseChangeLog>

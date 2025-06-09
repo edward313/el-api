@@ -1,0 +1,47 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1723007774552-1">
+        <sql>
+            UPDATE db_el_permission
+            SET name = 'Export To Excel Register Payout',
+                name_group = 'Register Payout',
+                p_code = 'RP_E',
+                action = '/v1/register-payout/export-to-excel'
+            WHERE name = 'Export To Excel Period Detail';
+        </sql>
+    </changeSet>
+    <changeSet author="LifeUni" id="1723007774552-2">
+        <sql>
+            UPDATE db_el_permission
+            SET name_group = REPLACE(REPLACE(name_group, 'Payout Period', 'Monthly Period'), 'Period Detail', 'Monthly Period Detail'),
+                name = REPLACE(REPLACE(name, 'Payout Period', 'Monthly Period'), 'Period Detail', 'Monthly Period Detail'),
+                description = REPLACE(REPLACE(description, 'Payout Period', 'Monthly Period'), 'Period Detail', 'Monthly Period Detail'),
+                action = REPLACE(REPLACE(action, 'payout-period', 'monthly-period'), 'period-detail', 'monthly-period-detail'),
+                p_code = REPLACE(REPLACE(p_code, 'PP_', 'MP_'), 'PD_', 'MPD_');
+        </sql>
+    </changeSet>
+    <changeSet author="LifeUni" id="1723007774552-3">
+        <sql>
+            DELETE FROM db_el_permission_group
+            WHERE permission_id IN (
+                SELECT id FROM db_el_permission WHERE p_code IN ('MP_C', 'MP_U')
+            );
+
+            DELETE FROM db_el_permission
+            WHERE p_code IN ('MP_C', 'MP_U');
+        </sql>
+    </changeSet>
+    <changeSet author="LifeUni" id="1723007774552-4">
+        <sql>
+            UPDATE db_el_student s
+            INNER JOIN (SELECT s.account_id as student_id, COUNT(b.id) AS count_booking_paid
+                FROM db_el_student s
+                INNER JOIN db_el_account a ON a.id = s.account_id
+                LEFT JOIN db_el_booking b ON b.student_id = s.account_id AND b.state = 1
+                WHERE a.kind = 4
+                GROUP BY s.account_id) as subquery ON subquery.student_id = s.account_id
+            SET s.is_referral_bonus_paid =
+                CASE WHEN subquery.count_booking_paid = 0 THEN FALSE ELSE TRUE END;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

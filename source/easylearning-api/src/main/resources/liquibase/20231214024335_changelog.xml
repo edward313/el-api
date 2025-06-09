@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1702521825081-1">
+        <createTable tableName="db_el_cart_item">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_cart_itemPK"/>
+            </column>
+            <column name="student_id" type="BIGINT"/>
+            <column name="course_id" type="BIGINT"/>
+            <column name="time_created" type="datetime"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702521825081-2">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="db_el_cart_item"
+                                 constraintName="FKd57een4ec7g4phchalv6cslf" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1702521825081-3">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_cart_item"
+                                 constraintName="FKr4xil99nxmfkf7e937ktqee5" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>

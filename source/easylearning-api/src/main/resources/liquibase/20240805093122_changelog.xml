@@ -1,0 +1,92 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1722850290858-1">
+        <createTable tableName="db_el_monthly_period">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_monthly_periodPK"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="datetime"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="start_date" type="datetime"/>
+            <column name="state" type="INT"/>
+            <column name="system_revenue" type="DOUBLE PRECISION"/>
+            <column name="total_payout" type="DOUBLE PRECISION"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-2">
+        <createTable tableName="db_el_monthly_period_detail">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_monthly_period_detailPK"/>
+            </column>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kind" type="INT"/>
+            <column name="state" type="INT"/>
+            <column name="total_money" type="DOUBLE PRECISION"/>
+            <column name="account_id" type="BIGINT"/>
+            <column name="monthly_period_id" type="BIGINT"/>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-3">
+        <addColumn tableName="db_el_register_payout">
+            <column name="tax_money" type="double precision" afterColumn="tax_percent"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-11">
+        <addColumn tableName="db_el_revenue_share">
+            <column name="payout_status" type="INT" afterColumn="id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-4">
+        <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="db_el_monthly_period_detail" constraintName="FKdmilda0um562djhwb79njv5nw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_account" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-5">
+        <addForeignKeyConstraint baseColumnNames="monthly_period_id" baseTableName="db_el_monthly_period_detail" constraintName="FKpnobg1h21h5igvwtysfw9q7sh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_monthly_period" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-6">
+        <dropForeignKeyConstraint baseTableName="db_el_period_detail" constraintName="FKf0ouuc2sayohc4dxlttygn1te"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-7">
+        <dropForeignKeyConstraint baseTableName="db_el_revenue_share" constraintName="FKkes49doprfr8a1f377xo3ew4b"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-8">
+        <dropForeignKeyConstraint baseTableName="db_el_period_detail" constraintName="FKsr5xrsov2posg2xgfd7knl7cu"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-9">
+        <dropTable tableName="db_el_payout_period"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-10">
+        <dropTable tableName="db_el_period_detail"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1722850290858-17">
+        <dropColumn columnName="payout_period_id" tableName="db_el_revenue_share"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,41 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1701665896764-1">
+        <createTable tableName="db_el_seller_code_tracking">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_seller_code_trackingPK"/>
+            </column>
+            <column name="student_id" type="BIGINT"/>
+            <column name="sell_code" type="VARCHAR(255)"/>
+            <column name="browser_code" type="VARCHAR(255)"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701665896764-2">
+        <addUniqueConstraint columnNames="browser_code" constraintName="UC_db_el_SELLER_CODE_TRACKINGBROWSER_CODE_COL"
+                             tableName="db_el_seller_code_tracking"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701665896764-3">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="db_el_seller_code_tracking"
+                                 constraintName="FK71f4iikviarxuvl3tbycotcfx" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

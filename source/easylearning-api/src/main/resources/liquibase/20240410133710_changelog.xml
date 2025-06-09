@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1712756239220-1">
+        <addColumn tableName="db_el_revenue_share">
+            <column name="source_student_id" type="bigint" afterColumn="seller_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1712756239220-2">
+        <addColumn tableName="db_el_revenue_share">
+            <column name="source_expert_id" type="bigint" afterColumn="seller_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1712756239220-3">
+        <addColumn tableName="db_el_revenue_share">
+            <column name="source_seller_id" type="bigint" afterColumn="seller_id"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1712756239220-4">
+        <addForeignKeyConstraint baseColumnNames="source_expert_id" baseTableName="db_el_revenue_share" constraintName="FK9yas8e0nst85djdyk4iwthubu" deferrable="false" initiallyDeferred="false" referencedColumnNames="account_id" referencedTableName="db_el_expert" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1712756239220-5">
+        <addForeignKeyConstraint baseColumnNames="source_seller_id" baseTableName="db_el_revenue_share" constraintName="FKn2iyujfjw613ofv26jkctpodc" deferrable="false" initiallyDeferred="false" referencedColumnNames="account_id" referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1712756239220-6">
+        <addForeignKeyConstraint baseColumnNames="source_student_id" baseTableName="db_el_revenue_share" constraintName="FKqvfhxsrdehkwgbftjnvl9s7pv" deferrable="false" initiallyDeferred="false" referencedColumnNames="account_id" referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

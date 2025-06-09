@@ -1,0 +1,31 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1705319104799-1">
+        <addColumn tableName="db_el_course">
+            <column name="average_star" type="float" afterColumn="price"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1705319104799-2">
+        <addColumn tableName="db_el_course">
+            <column name="sold_quantity" type="integer" afterColumn="average_star"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1705319104799-3">
+        <addColumn tableName="db_el_course">
+            <column name="total_lesson" type="integer" afterColumn="sold_quantity"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1705319104799-4">
+        <addColumn tableName="db_el_course">
+            <column name="total_review" type="integer" afterColumn="total_lesson"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1705319104799-5">
+        <addColumn tableName="db_el_course">
+            <column name="total_study_time" type="bigint" afterColumn="total_review"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

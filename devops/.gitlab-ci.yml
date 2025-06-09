@@ -1,0 +1,28 @@
+variables:
+  IMAGE_NAME: phatluu313/el-api
+  DOCKER_REPO: ${IMAGE_NAME}
+  DOCKER_CACHE_IMAGE: ${DOCKER_REPO}:${CI_COMMIT_REF_NAME}
+  CI_PROJECT_NAME: el-api
+  DB_DATABASE: db_el
+  APP_DEV_PORT: 8781
+  MAVEN_OPTS: "-Dmaven.repo.local=${CI_PROJECT_DIR}/.repository/"
+  NAME_FOLDER : easylearning-api
+  JAR_NAME : easylearning-api-0.0.1.jar
+
+stages:
+  - build
+  - build-image
+  - deploy
+include:
+  - "https://raw.githubusercontent.com/edward313/devops-boilerplate/dev/template/build.maven.gitlab-ci.yml"
+  - "https://raw.githubusercontent.com/edward313/devops-boilerplate/dev/template/build.docker.gitlab-ci.yml"
+  - "https://raw.githubusercontent.com/edward313/devops-boilerplate/dev/template/deploy.vps.gitlab-ci.yml"
+build-image:
+  before_script:
+    - docker login -u $REGISTRY_USER -p $REGISTRY_PASS
+    - cp -r ./source/${NAME_FOLDER}/target ./devops/
+    - cd devops
+    - wget https://raw.githubusercontent.com/edward313/devops-boilerplate/dev/docker/springboot/Dockerfile
+    - sed -i "s/{JAR_NAME}/${JAR_NAME}/g" Dockerfile
+  only:
+    - dev

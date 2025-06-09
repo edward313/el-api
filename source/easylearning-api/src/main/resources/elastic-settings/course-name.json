@@ -1,0 +1,23 @@
+{
+  "analysis": {
+    "filter": {
+      "lowercase_filter": {
+        "type": "lowercase"
+      },
+      "asciifolding_filter": {
+        "type": "asciifolding"
+      },
+      "remove_diacritics": {
+        "type": "asciifolding",
+        "preserve_original": false
+      }
+    },
+    "analyzer": {
+      "custom_analyzer": {
+        "type": "custom",
+        "tokenizer": "standard",
+        "filter": ["lowercase", "asciifolding", "remove_diacritics"]
+      }
+    }
+  }
+}

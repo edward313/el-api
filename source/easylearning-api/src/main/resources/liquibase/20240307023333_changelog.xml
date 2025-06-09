@@ -1,0 +1,18 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1709778848135-1">
+        <createTable tableName="db_el_course_combo_detail_version">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_course_combo_detail_versionPK"/>
+            </column>
+            <column name="combo_id" type="BIGINT"/>
+            <column name="course_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1709778848135-2">
+        <addForeignKeyConstraint baseColumnNames="combo_id" baseTableName="db_el_course_combo_detail_version" constraintName="FKa98qla2slnq0d437pkq12bqbr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course_versioning" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1709778848135-3">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_course_combo_detail_version" constraintName="FKd6wn0i2odaig7udk0qf8fvokh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course" validate="true"/>
+    </changeSet>
+</databaseChangeLog>

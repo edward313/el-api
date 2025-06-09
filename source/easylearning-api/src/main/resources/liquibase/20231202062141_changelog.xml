@@ -1,0 +1,99 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1701498110762-1">
+        <createTable tableName="db_el_course_retail">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_course_retailPK"/>
+            </column>
+            <column name="course_id" type="BIGINT"/>
+            <column name="seller_id" type="BIGINT"/>
+            <column name="sell_code" type="VARCHAR(255)"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-2">
+        <createTable tableName="db_el_course_transaction">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_course_transactionPK"/>
+            </column>
+            <column name="course_id" type="BIGINT"/>
+            <column name="expert_id" type="BIGINT"/>
+            <column name="seller_id" type="BIGINT"/>
+            <column name="student_id" type="BIGINT"/>
+            <column name="ref_sell_code" type="VARCHAR(255)"/>
+            <column name="price" type="DOUBLE PRECISION"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-3">
+        <addUniqueConstraint columnNames="sell_code" constraintName="UC_db_el_COURSE_RETAILSELL_CODE_COL"
+                             tableName="db_el_course_retail"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-4">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="db_el_course_transaction"
+                                 constraintName="FK4no4b0adjl3embc10f9ev2m1h" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-5">
+        <addForeignKeyConstraint baseColumnNames="seller_id" baseTableName="db_el_course_transaction"
+                                 constraintName="FKikk4tim3773nrinpefydbubso" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-6">
+        <addForeignKeyConstraint baseColumnNames="expert_id" baseTableName="db_el_course_transaction"
+                                 constraintName="FKji0vpudggc7w3wvs1a7b16yjc" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_expert" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-7">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_course_retail"
+                                 constraintName="FKnqdp3ve7usq1dacfqbr4pw8a0" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-8">
+        <addForeignKeyConstraint baseColumnNames="seller_id" baseTableName="db_el_course_retail"
+                                 constraintName="FKo8pqrr8m9vjiqcarjcku165o7" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="account_id"
+                                 referencedTableName="db_el_student" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1701498110762-9">
+        <addForeignKeyConstraint baseColumnNames="course_id" baseTableName="db_el_course_transaction"
+                                 constraintName="FKsd13ni6bi1urr16dgesr33x06" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_course"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>

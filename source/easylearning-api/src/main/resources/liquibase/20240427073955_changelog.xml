@@ -1,0 +1,50 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeUni" id="1714203607643-1">
+        <addColumn tableName="db_el_wallet">
+            <column name="holding_balance" type="double precision" afterColumn="balance"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-2">
+        <addColumn tableName="db_el_register_payout">
+            <column name="money" type="double precision" afterColumn="note"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-3">
+        <addColumn tableName="db_el_period_detail">
+            <column name="tax_percent" type="integer" afterColumn="total_money"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-4">
+        <addColumn tableName="db_el_period_detail">
+            <column name="total_tax_money" type="double precision" afterColumn="total_money"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-5">
+        <dropForeignKeyConstraint baseTableName="db_el_wallet_transaction" constraintName="FKc2hr56ltedaqx869qrgajqw96"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-6">
+        <dropTable tableName="db_el_wallet_transaction"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-13">
+        <dropColumn columnName="end_date" tableName="db_el_register_payout"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-14">
+        <dropColumn columnName="kind" tableName="db_el_register_payout"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-15">
+        <dropColumn columnName="payout_status" tableName="db_el_revenue_share"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-16">
+        <dropColumn columnName="start_date" tableName="db_el_register_payout"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-17">
+        <dropColumn columnName="total_course" tableName="db_el_period_detail"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-18">
+        <dropColumn columnName="total_ref_course" tableName="db_el_period_detail"/>
+    </changeSet>
+    <changeSet author="LifeUni" id="1714203607643-19">
+        <dropColumn columnName="total_ref_money" tableName="db_el_period_detail"/>
+    </changeSet>
+</databaseChangeLog>

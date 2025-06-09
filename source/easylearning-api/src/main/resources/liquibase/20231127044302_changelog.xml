@@ -1,0 +1,97 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="LifeuniApi" id="1701060191294-1">
+        <createTable tableName="db_el_expert">
+            <column name="account_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_expertPK"/>
+            </column>
+            <column name="birthday" type="datetime"/>
+            <column name="referral_code" type="VARCHAR(255)"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-2">
+        <createTable tableName="db_el_student">
+            <column name="account_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="db_el_studentPK"/>
+            </column>
+            <column name="address" type="VARCHAR(255)"/>
+            <column name="province_id" type="BIGINT"/>
+            <column name="district_id" type="BIGINT"/>
+            <column name="ward_id" type="BIGINT"/>
+            <column name="referral_code" type="VARCHAR(255)"/>
+            <column name="birthday" type="datetime"/>
+            <column name="is_seller" type="BIT"/>
+            <column name="status" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_by" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modified_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-3">
+        <addUniqueConstraint columnNames="referral_code" constraintName="UC_db_el_EXPERTREFERRAL_CODE_COL"
+                             tableName="db_el_expert"/>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-4">
+        <addUniqueConstraint columnNames="referral_code" constraintName="UC_db_el_STUDENTREFERRAL_CODE_COL"
+                             tableName="db_el_student"/>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-5">
+        <addForeignKeyConstraint baseColumnNames="province_id" baseTableName="db_el_student"
+                                 constraintName="FK4anidgiabqxne6trn7lg84wg6" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-6">
+        <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="db_el_expert"
+                                 constraintName="FK62hxgjf9ud616w4lowf15ikpy" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_account" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-7">
+        <addForeignKeyConstraint baseColumnNames="district_id" baseTableName="db_el_student"
+                                 constraintName="FKbhusapxopcmewny9wfqmogmyb" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-8">
+        <addForeignKeyConstraint baseColumnNames="account_id" baseTableName="db_el_student"
+                                 constraintName="FKl16e83entg9wmjf7f6r8hyt97" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id"
+                                 referencedTableName="db_el_account" validate="true"/>
+    </changeSet>
+    <changeSet author="LifeuniApi" id="1701060191294-9">
+        <addForeignKeyConstraint baseColumnNames="ward_id" baseTableName="db_el_student"
+                                 constraintName="FKl6cb3360n2kgsms1hilegtamb" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="id" referencedTableName="db_el_nation"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>
