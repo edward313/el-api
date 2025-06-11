@@ -235,7 +235,6 @@ public class BookingController extends ABasicController {
         for (CartItem cartItem : cartItems) {
             if (cartItem.getTempSellCode() != null) {
                 cartItem.setSellCode(cartItem.getTempSellCode());
-
             }
 
         }
@@ -247,12 +246,12 @@ public class BookingController extends ABasicController {
             processRevenueShareAndRegistrationForWalletAndVoucherMethod(booking, student);
         }
         PayosPaymentDto paymentInfo;
-//        paymentInfo = payosService.getPayosPaymentDto(booking.getTotalMoney().longValue(),booking.getId(),
-//                "Don hang " + booking.getId());
-        paymentInfo = payosService.getPayosPaymentDto(10000L,booking.getId(),
+        paymentInfo = payosService.getPayosPaymentDto(booking.getTotalMoney().longValue(),booking.getId(),
                 "Don hang " + booking.getId());
+//        paymentInfo = payosService.getPayosPaymentDto(10000L,booking.getId(),
+//                "Don hang " + booking.getId());
         apiMessageDto.setData(paymentInfo);
-        apiMessageDto.setMessage("Sucess");
+        apiMessageDto.setMessage("Tạo mã thành công");
 
         return apiMessageDto;
     }

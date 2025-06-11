@@ -6,7 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "lifeuni-gg", url = "${feign.lifeuni.gg.url}", configuration = CustomFeignConfig.class)
+@FeignClient(name = "easylearning-gg", url = "${feign.easylearning.gg.url}", configuration = CustomFeignConfig.class)
 public interface FeignGoogleService {
 
     @GetMapping(value = "/oauth2/v1/userinfo")

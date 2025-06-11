@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-@FeignClient(name = "lifeuni-media", url = "${feign.lifeuni.media.url}", configuration = CustomFeignConfig.class)
+@FeignClient(name = "easylearning-media", url = "${feign.easylearning.media.url}", configuration = CustomFeignConfig.class)
 public interface FeignLifeUniMediaService {
 
     @PostMapping(value = "/v1/file/delete", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

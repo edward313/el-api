@@ -320,9 +320,21 @@ public class AccountController extends ABasicController{
         account.setResetPwdCode(otp);
         account.setResetPwdTime(new Date());
         accountRepository.save(account);
-
+        String subject = "Đặt lại mật khẩu";
+        String htmlContent = "<html>\n" +
+                             "    <body style=\"font-family: Arial, sans-serif; line-height: 1.6;\">\n" +
+                             "        <h2>Yêu cầu đặt lại mật khẩu</h2>\n" +
+                             "        <p>Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn.</p>\n" +
+                             "        <p><strong>Mã xác thực (OTP) của bạn là:</strong></p>\n" +
+                             "        <div style=\"font-size: 24px; font-weight: bold; color: #2c3e50; margin: 10px 0;\">\n" + otp + "            </div>\n" +
+                             "            <p>Mã này sẽ hết hạn sau 10 phút.</p>\n" +
+                             "            <p>Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.</p>\n" +
+                             "            <br>\n" +
+                             "            <p>Trân trọng,<br>Đội ngũ hỗ trợ Easylearing </p>\n" +
+                             "        </body>\n" +
+                             "    </html>\n";
         //send email
-        userBaseApiService.sendEmail(account.getEmail(),"OTP: "+otp, "Reset password",false);
+        userBaseApiService.sendEmail(account.getEmail(), htmlContent, subject, true);
 
         ForgetPasswordDto forgetPasswordDto = new ForgetPasswordDto();
         String hash = AESUtils.encrypt (account.getId()+";"+otp, true);

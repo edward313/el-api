@@ -1,5 +1,6 @@
 package com.easylearning.api.controller;
 
+import com.easylearning.api.service.UserBaseApiService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.easylearning.api.constant.LifeUniConstant;
 import com.easylearning.api.dto.ApiMessageDto;
@@ -127,7 +128,8 @@ public class ABasicController {
     private ReferralSellerLogRepository referralSellerLogRepository;
     @Autowired
     private CartItemMapper cartItemMapper;
-
+    @Autowired
+    UserBaseApiService userBaseApiService;
     public Long getCurrentUser(){
         UserBaseJwt userBaseJwt = userService.getAddInfoFromToken();
         if (userBaseJwt == null) {
@@ -382,6 +384,32 @@ public class ABasicController {
         }
         Account account = accountMapper.fromCreateExpertFormToAccount(createExpertForm);
         account.setKind(LifeUniConstant.USER_KIND_EXPERT);
+
+        String htmlContent = String.format(
+                "<!DOCTYPE html>" +
+                "<html lang='vi'>" +
+                "<head>" +
+                "    <meta charset='UTF-8'>" +
+                "    <title>Thông Báo Xét Duyệt Tài Khoản Chuyên Gia</title>" +
+                "</head>" +
+                "<body>" +
+                "    <p><b>Subject:</b> Thông Báo Xét Duyệt Tài Khoản Chuyên Gia</p>" +
+                "    <p>Kính gửi <b>%s</b>,</p>" + // expertName
+                "    <p>Chúng tôi xin vui mừng thông báo rằng tài khoản chuyên gia của bạn đã được <b>xét duyệt thành công</b>. Dưới đây là thông tin tài khoản của bạn:</p>" +
+                "    <p><b>Tên tài khoản:</b> %s</p>" + // username
+                "    <p><b>Mật khẩu tạm thời:</b> %s</p>" + // temporaryPassword
+                "    <p><b>Liên kết đăng nhập:</b> <a href='%s'>Đăng nhập tại đây</a></p>" + // loginLink
+                "    <p>Vì lý do bảo mật, chúng tôi khuyến nghị bạn <b>đổi mật khẩu ngay sau khi đăng nhập lần đầu</b>. Vui lòng không chia sẻ thông tin tài khoản của bạn với bất kỳ ai.</p>" +
+                "    <p>Nếu bạn có bất kỳ câu hỏi nào hoặc cần hỗ trợ, xin vui lòng liên hệ với chúng tôi qua email <a href='mailto:easylearning445@gmail.com'>easylearning445@gmail.com</a></p>" +
+                "    <p>Trân trọng,</p>" +
+                "    <p>Đội ngũ hỗ trợ</p>" +
+                "    <p>Tên Công ty/Tổ chức</p>" +
+                "    <p>Thông tin liên hệ</p>" +
+                "</body>" +
+                "</html>",
+                account.getEmail(), account.getEmail(), createExpertForm.getPassword(), "https://el-fe.edward.io.vn/"
+        );
+        userBaseApiService.sendEmail(account.getEmail(), htmlContent, "Thông Báo Xét Duyệt Tài Khoản Chuyên Gia", true);
         if(StringUtils.isNoneBlank(createExpertForm.getPassword())){
             account.setPassword(passwordEncoder.encode(createExpertForm.getPassword()));
         }
